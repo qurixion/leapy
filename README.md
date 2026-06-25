@@ -32,7 +32,7 @@ Searches Google Maps for businesses in any location and category. Extracts name,
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/congenial-waffle.git
+git clone https://github.com/qurixion/congenial-waffle.git
 cd congenial-waffle
 ```
 
