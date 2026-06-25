@@ -1,4 +1,4 @@
-# congenial-waffle
+# leapy
 
 A Google Maps lead generation tool that searches for businesses, extracts contact information, and scrapes emails and social media links from their websites.
 
