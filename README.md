@@ -33,7 +33,7 @@ Searches Google Maps for businesses in any location and category. Extracts name,
 
 ```bash
 git clone https://github.com/qurixion/leapy.git
-cd congenial-waffle
+cd leapy
 ```
 
 ### Install Python packages
@@ -61,49 +61,6 @@ Download and install from https://google.com/chrome
 ```bash
 brew install --cask google-chrome
 ```
-
----
-
-## Windows Setup (Important)
-
-On Linux and macOS the script finds ChromeDriver automatically from the system.
-On Windows you need to do one of the following:
-
-### Option 1: Let webdriver-manager handle it (easiest)
-
-Just install the Python packages and run the script. On first run it will automatically download the correct ChromeDriver for your Chrome version. No manual setup needed.
-
-```bash
-pip install webdriver-manager
-```
-
-### Option 2: Manual ChromeDriver setup
-
-1. Check your Chrome version by going to `chrome://settings/help` in your browser
-2. Download the matching ChromeDriver from https://chromedriver.chromium.org/downloads
-3. Extract the zip file
-4. Place `chromedriver.exe` somewhere on your computer like `C:\chromedriver\chromedriver.exe`
-5. Open `congenial-waffle.py` and find this section inside the `setup_driver` method in the `BrowserWorker` class:
-
-```python
-windows_paths = [
-    r"C:\Program Files\Google\Chrome\chromedriver.exe",
-    r"C:\chromedriver\chromedriver.exe",
-    os.path.join(os.environ.get("USERPROFILE", ""), "chromedriver.exe"),
-]
-```
-
-6. Add your ChromeDriver path to the `windows_paths` list if it is in a different location
-
-### Option 3: Add ChromeDriver to PATH
-
-1. Download ChromeDriver from https://chromedriver.chromium.org/downloads
-2. Extract and place `chromedriver.exe` anywhere
-3. Add that folder to your Windows PATH environment variable
-4. The script will find it automatically
-
----
-
 ## Usage
 
 ### Interactive Mode
@@ -111,7 +68,7 @@ windows_paths = [
 Run without any arguments and follow the prompts:
 
 ```bash
-python congenial-waffle.py
+python leapy.py
 ```
 
 The script will show a menu:
@@ -139,19 +96,19 @@ If you choose option 1 it will ask you for:
 Generate a sample config file:
 
 ```bash
-python congenial-waffle.py --template
+python leapy.py --template
 ```
 
 Edit `config.txt` with your settings then run:
 
 ```bash
-python congenial-waffle.py --config config.txt
+python leapy.py --config config.txt
 ```
 
 ### Command Line Mode
 
 ```bash
-python congenial-waffle.py -c "restaurant" -r "Paris France" -w ./output -n paris_leads
+python leapy.py -c "restaurant" -r "Paris France" -w ./output -n paris_leads
 ```
 
 ---
@@ -179,10 +136,10 @@ python congenial-waffle.py -c "restaurant" -r "Paris France" -w ./output -n pari
 
 ## Config File Format
 
-Generate a template with `python congenial-waffle.py --template` or create `config.txt` manually:
+Generate a template with `python leapy.py --template` or create `config.txt` manually:
 
 ```
-# congenial-waffle Config File
+# leapy Config File
 # Lines starting with # are comments
 
 # ── SEARCH ──────────────────────────────────
@@ -336,7 +293,7 @@ For each business the script collects:
 The script supports running multiple Chrome browsers at the same time to speed up scraping. Each browser handles a different search so they work in parallel.
 
 ```bash
-python congenial-waffle.py -r "Paris,Lyon,Marseille" -b 3 -w ./output
+python leapy.py -r "Paris,Lyon,Marseille" -b 3 -w ./output
 ```
 
 **RAM requirements:**
@@ -371,7 +328,7 @@ Tokyo Japan
 
 Then use them with:
 ```bash
-python congenial-waffle.py -c categories.txt -r regions.txt -w ./output
+python leapy.py -c categories.txt -r regions.txt -w ./output
 ```
 
 ---
@@ -380,47 +337,47 @@ python congenial-waffle.py -c categories.txt -r regions.txt -w ./output
 
 Collect 50 restaurants in London:
 ```bash
-python congenial-waffle.py -c "restaurant" -r "London UK" -w ./output -n london -l 50
+python leapy.py -c "restaurant" -r "London UK" -w ./output -n london -l 50
 ```
 
 Multiple categories and regions:
 ```bash
-python congenial-waffle.py -c "bar,cafe" -r "Paris France,Lyon France" -w ./output -n france
+python leapy.py -c "bar,cafe" -r "Paris France,Lyon France" -w ./output -n france
 ```
 
 Use 2 browsers for faster scraping:
 ```bash
-python congenial-waffle.py -c "gym" -r "New York NY" -w ./output -b 2
+python leapy.py -c "gym" -r "New York NY" -w ./output -b 2
 ```
 
 Split into separate folders per category:
 ```bash
-python congenial-waffle.py -c "bar,cafe,restaurant" -r "Paris France" -w ./output --split-category
+python leapy.py -c "bar,cafe,restaurant" -r "Paris France" -w ./output --split-category
 ```
 
 Split into separate folders per region:
 ```bash
-python congenial-waffle.py -c "restaurant" -r "Paris France,London UK,Berlin Germany" -w ./output --split-region
+python leapy.py -c "restaurant" -r "Paris France,London UK,Berlin Germany" -w ./output --split-region
 ```
 
 Split by both category and region:
 ```bash
-python congenial-waffle.py -c "bar,cafe" -r "Paris France,London UK" -w ./output --split-category --split-region
+python leapy.py -c "bar,cafe" -r "Paris France,London UK" -w ./output --split-category --split-region
 ```
 
 Run from config file:
 ```bash
-python congenial-waffle.py --config config.txt
+python leapy.py --config config.txt
 ```
 
 Text search without GPS:
 ```bash
-python congenial-waffle.py -r "Tokyo" -w ./output --no-gps
+python leapy.py -r "Tokyo" -w ./output --no-gps
 ```
 
 Save only CSV, skip Excel and JSON:
 ```bash
-python congenial-waffle.py -r "Madrid Spain" -w ./output --no-xlsx --no-json
+python leapy.py -r "Madrid Spain" -w ./output --no-xlsx --no-json
 ```
 
 ---
@@ -428,11 +385,11 @@ python congenial-waffle.py -r "Madrid Spain" -w ./output --no-xlsx --no-json
 ## Project Structure
 
 ```
-congenial-waffle/
-├── congenial-waffle.py    (main script)
+leapy/
+├── leapy.py    (main script)
 ├── config.txt             (your config file, generated with --template)
 ├── README.md              (this file)
-└── congenial-waffle.log   (error log, created when you run the script)
+└── leapy.log   (error log, created when you run the script)
 ```
 
 ---
@@ -469,7 +426,7 @@ Make sure you enabled split by category or split by region during setup or in th
 
 - The script adds delays between requests to avoid being blocked by Google
 - GPS geocoding uses free OpenStreetMap service with a 1 second delay between requests as required
-- All errors are logged to `congenial-waffle.log` in the folder where you run the script
+- All errors are logged to `leapy.log` in the folder where you run the script
 - The combined file is always created regardless of split settings
 
 ## License
